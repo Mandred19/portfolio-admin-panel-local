@@ -44,9 +44,10 @@ export default new Vuex.Store({
         console.warn(e);
       }
     },
-    async uploadProject({ getters }, project) {
+    async uploadProject({ getters, dispatch }, project) {
       try {
         await getters.getDB.ref('/projects').push({ ...project });
+        await dispatch('downloadProjects');
       } catch (e) {
         console.warn(e);
       }
