@@ -1,11 +1,14 @@
 import Vue from 'vue';
 
+import bootstrap from 'bootstrap';
 import firebase from 'firebase/app';
 
 import App from './App';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
+
+import 'bootstrap/scss/bootstrap.scss';
 
 import 'firebase/database';
 
@@ -25,5 +28,6 @@ firebase.initializeApp({
 new Vue({
   router,
   store,
+  bootstrap,
   render: (h) => h(App),
 }).$mount('#app');

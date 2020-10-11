@@ -2,8 +2,8 @@
   {
     "title": "TITLE",
     "image": "image_name.ext",
-    "site-url": "URL from GIT",
-    "completion-date": "2020:09:09",
+    "url": "URL from GIT",
+    "date": "2020:09:09",
     "technologies": ["HTML", "CSS", "JS"],
     "description": "Some text for description of project || null"
   }

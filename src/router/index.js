@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 
 import ProjectsList from '../views/ProjectsList';
 import ProjectEdit from '../views/ProjectEdit';
-import CreateProject from '../views/CreateProject';
+import AddProject from '../views/AddProject';
 
 Vue.use(VueRouter);
 
@@ -19,9 +19,9 @@ const routes = [
     component: ProjectEdit,
   },
   {
-    path: '/create-project',
-    name: 'CreateProject',
-    component: CreateProject,
+    path: '/add-project',
+    name: 'AddProject',
+    component: AddProject,
   },
 ];
 

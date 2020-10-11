@@ -18,5 +18,6 @@ module.exports = {
     'no-underscore-dangle': 0,
     indent: ['error', 2],
     quotes: ['error', 'single'],
+    'max-len': ['error', { 'code': 120 }]
   },
 };

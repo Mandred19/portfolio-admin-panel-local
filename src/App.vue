@@ -1,8 +1,18 @@
 <template>
-  <div>
-    <div>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/create-project">Create</router-link>
+  <div class="container">
+    <div class="nav justify-content-center">
+      <div
+        v-for="(item, idx) of navLinks"
+        :key="idx"
+        class="nav-item">
+        <router-link
+          :to="item.to"
+          exact
+          :class="{ active: item.active }"
+          class="nav-link">
+          {{ item.title }}
+        </router-link>
+      </div>
     </div>
 
     <router-view />
@@ -15,10 +25,18 @@ import { mapActions } from 'vuex';
 export default {
   name: 'App',
   created() {
-    this.createStorage();
+    this.initApp();
   },
   methods: {
-    ...mapActions(['createStorage']),
+    ...mapActions(['initApp']),
+  },
+  computed: {
+    navLinks() {
+      return [
+        { to: '/', title: 'Home', active: this.$route.name === 'ProjectsList' },
+        { to: '/add-project', title: 'Add project', active: this.$route.name === 'AddProject' },
+      ];
+    },
   },
 };
 </script>
