@@ -47,7 +47,17 @@ export default new Vuex.Store({
     async uploadProject({ getters, dispatch }, project) {
       try {
         await getters.getDB.ref('/projects').push({ ...project });
+        await dispatch('uploadImage', { image: project.image, dir: 'projects' });
         await dispatch('downloadProjects');
+      } catch (e) {
+        console.warn(e);
+      }
+    },
+    async uploadImage({ getters }, { image, dir }) {
+      const fileRef = getters.getStorage.ref().child(`${dir}/${image.name}`);
+      try {
+        const req = await fileRef.put(image);
+        await console.log(req);
       } catch (e) {
         console.warn(e);
       }

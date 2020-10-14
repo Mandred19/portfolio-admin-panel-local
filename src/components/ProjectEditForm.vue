@@ -18,7 +18,18 @@
       <input v-model="project.date" type="date" class="form-control" id="project-completion-date">
     </div>
 
-    <input type="file" class="form-control" id="project-add-file">
+    <div class="form-group form-check">
+      <input type="checkbox" v-model="project.isVisible" class="form-check-input" id="isVisible">
+      <label class="form-check-label" for="isVisible">Set project visibility</label>
+    </div>
+
+    <input
+    @change="addFileHandler($event)"
+    type="file"
+    multiple="false"
+    accept="image/png, image/jpeg"
+    id="project-add-file"
+    style="margin-bottom: 16px;">
 
     <div class="form-group d-flex flex-column">
       <label for="project-description">Project description</label>
@@ -44,7 +55,7 @@ export default {
     selectedProject: { type: Object, default: () => {} },
   },
   created() {
-    if (this.route === 'ProjectEdit') {
+    if (this.$route.name === 'ProjectEdit') {
       this.project = this.selectedProject;
     }
   },
@@ -52,6 +63,10 @@ export default {
     submitHandler() {
       this.$emit('submitHandler', this.project);
       this.resetForm();
+    },
+    addFileHandler(event) {
+      // eslint-disable-next-line prefer-destructuring
+      this.project.image = event.target.files[0];
     },
     resetForm() {
       this.project = {
@@ -61,6 +76,7 @@ export default {
         description: null,
         image: null,
         technologies: null,
+        isVisible: true,
       };
     },
   },
@@ -73,6 +89,7 @@ export default {
         description: null,
         image: null,
         technologies: null,
+        isVisible: true,
       },
     };
   },
