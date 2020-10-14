@@ -7,8 +7,7 @@
         <ProjectEditForm
         @submitHandler="updateProject($event)"
         :submitTitle="'Save changes'"
-        :selectedProject="selectedProject"
-        :route="'ProjectEdit'"/>
+        :selectedProject="selectedProject"/>
       </div>
     </div>
   </div>
