@@ -10,9 +10,39 @@
       <input v-model="project.url" type="url" class="form-control" id="project-url">
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-4">
       <label for="project-completion-date">Project completion date</label>
       <input v-model="project.date" type="date" class="form-control" id="project-completion-date">
+    </div>
+
+    <div class="input-group">
+      <input
+        v-model="technology"
+        type="text"
+        class="form-control"
+        placeholder="Technology">
+      <div class="input-group-append">
+        <button
+          @click.stop="addTechnology(technology)"
+          type="button"
+          class="btn btn-outline-secondary">Add technology</button>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row flex-wrap mb-3">
+      <template v-if="project.technologies.length">
+        <h4
+          v-for="(tech, idx) of project.technologies"
+          :key="idx"
+          @click.stop="deleteTechnology(tech)"
+          class="mr-1">
+        <span class="badge badge-secondary">
+          {{ tech }}
+        </span>
+        </h4>
+      </template>
+
+      <p v-else>Technology list is empty</p>
     </div>
 
     <div class="form-group form-check">
@@ -23,7 +53,7 @@
     <input
     @change="addFileHandler($event)"
     type="file"
-    multiple="false"
+    :multiple="false"
     accept="image/png, image/jpeg"
     id="project-add-file"
     style="margin-bottom: 16px;">
@@ -35,7 +65,7 @@
         name="description"
         id="project-description"
         cols="30"
-        rows="10"></textarea>
+        rows="5"></textarea>
     </div>
 
     <button type="submit" class="btn btn-primary">{{ submitTitle }}</button>
@@ -55,6 +85,15 @@ export default {
     }
   },
   methods: {
+    addTechnology(tech) {
+      if (tech) {
+        this.project.technologies.push(tech);
+        this.technology = '';
+      }
+    },
+    deleteTechnology(tech) {
+      this.project.technologies = this.project.technologies.filter((item) => item !== tech);
+    },
     submitHandler() {
       this.$emit('submitHandler', this.project);
       this.resetForm();
@@ -70,7 +109,7 @@ export default {
         date: null,
         description: null,
         image: null,
-        technologies: null,
+        technologies: ['HTML', 'CSS', 'JavaScript'],
         isVisible: true,
       };
     },
@@ -83,9 +122,10 @@ export default {
         date: null,
         description: null,
         image: null,
-        technologies: null,
+        technologies: ['HTML', 'CSS', 'JavaScript'],
         isVisible: true,
       },
+      technology: '',
     };
   },
 };

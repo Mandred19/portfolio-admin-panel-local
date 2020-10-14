@@ -21,12 +21,14 @@
 
                 <p>{{ item.description }}</p>
 
-                <span
-                  v-for="tech of item.technologies"
-                  :key="tech"
-                  class="badge badge-secondary">
-                {{ tech }}
-              </span>
+                <div class="d-flex flex-row flex-wrap mb-2">
+                  <span
+                    v-for="tech of item.technologies"
+                    :key="tech"
+                    class="badge badge-secondary mr-1">
+                  {{ tech }}
+                </span>
+                </div>
 
                 <div class="form-group form-check">
                   <input type="checkbox" :checked="item.isVisible" disabled class="form-check-input" id="isVisible">
