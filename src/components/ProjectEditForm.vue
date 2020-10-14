@@ -101,6 +101,7 @@ export default {
     addFileHandler(event) {
       // eslint-disable-next-line prefer-destructuring
       this.project.image = event.target.files[0];
+      this.project.imageName = `projects/${event.target.files[0].name}`;
     },
     resetForm() {
       this.project = {
@@ -109,6 +110,7 @@ export default {
         date: null,
         description: null,
         image: null,
+        imageName: null,
         technologies: ['HTML', 'CSS', 'JavaScript'],
         isVisible: true,
       };
@@ -122,6 +124,7 @@ export default {
         date: null,
         description: null,
         image: null,
+        imageName: null,
         technologies: ['HTML', 'CSS', 'JavaScript'],
         isVisible: true,
       },

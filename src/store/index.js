@@ -25,7 +25,7 @@ export default new Vuex.Store({
     _SET_DB(state) {
       state.db = firebase.database();
     },
-    _SET_PROJECTS(state, val) {
+    _SET_PROJECT_LIST(state, val) {
       state.projects = val;
     },
   },
@@ -33,12 +33,12 @@ export default new Vuex.Store({
     initApp({ commit, dispatch }) {
       commit('_SET_DB');
       commit('_SET_STORAGE');
-      dispatch('downloadProjects');
+      dispatch('updateProjectList');
     },
-    async downloadProjects({ getters, commit }) {
+    async updateProjectList({ getters, commit }) {
       try {
         const projects = (await getters.getDB.ref('/projects').once('value')).val() || [];
-        commit('_SET_PROJECTS', Object.keys(projects).map((key) => ({ ...projects[key], id: key })));
+        commit('_SET_PROJECT_LIST', Object.keys(projects).map((key) => ({ ...projects[key], id: key })));
       } catch (e) {
         console.warn(e);
       }
@@ -53,7 +53,7 @@ export default new Vuex.Store({
     async saveProjectInDB({ getters, dispatch }, project) {
       try {
         await getters.getDB.ref('/projects').push(project);
-        await dispatch('downloadProjects');
+        await dispatch('updateProjectList');
       } catch (e) {
         console.warn(e);
       }
@@ -69,6 +69,14 @@ export default new Vuex.Store({
               dispatch('saveProjectInDB', { ...project, imageSrc });
             });
         });
+    },
+    async removeProject({ getters, dispatch }, id) {
+      const ref = getters.getDB.ref('projects').child(id);
+      const fileName = (await ref.child('imageName').once('value')).val() || '';
+      const fileRef = getters.getStorage.ref().child(fileName);
+      await ref.remove();
+      await fileRef.delete();
+      await dispatch('updateProjectList');
     },
     /* async downloadProjectImages({ getters, commit }) {
       const ref = getters.getStorage.ref().child('project');

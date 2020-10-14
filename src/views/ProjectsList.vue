@@ -46,7 +46,7 @@
 
               <router-link tag="button" :to="`/project/${item.id}`" class="btn btn-primary">Edit</router-link>
 
-              <button class="btn btn-danger">Delete</button>
+              <button @click="deleteProject(item.id)" class="btn btn-danger">Delete</button>
             </div>
           </div>
         </li>
@@ -56,10 +56,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'ProjectsList',
+  methods: {
+    ...mapActions(['removeProject']),
+    deleteProject(id) {
+      this.removeProject(id);
+    },
+  },
   computed: {
     ...mapGetters({
       projectsList: 'getProjects',
