@@ -33,12 +33,18 @@ export default {
   computed: {
     navLinks() {
       return [
-        { to: '/', title: 'Home', active: this.$route.name === 'ProjectsList' },
+        { to: '/', title: 'Projects', active: this.$route.name === 'ProjectsList' },
         { to: '/add-project', title: 'Add project', active: this.$route.name === 'AddProject' },
+        { to: '/skills', title: 'Skills', active: this.$route.name === 'SkillsList' },
+        { to: '/add-skill', title: 'Add skill', active: this.$route.name === 'AddSkill' },
       ];
     },
   },
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .active {
+    background-color: rgba(#999, .2);
+  }
+</style>

@@ -15,12 +15,14 @@
       <input v-model="project.date" type="date" class="form-control" id="project-completion-date">
     </div>
 
+    <label class="form-check-label mb-2" for="tech-input">Project technologies</label>
     <div class="input-group">
       <input
-        v-model="technology"
-        type="text"
-        class="form-control"
-        placeholder="Technology">
+      v-model="technology"
+      type="text"
+      class="form-control"
+      placeholder="Technology"
+      id="tech-input">
       <div class="input-group-append">
         <button
           @click.stop="addTechnology(technology)"
@@ -35,6 +37,7 @@
           v-for="(tech, idx) of project.technologies"
           :key="idx"
           @click.stop="deleteTechnology(tech)"
+          :title="`Click to remove ${tech}`"
           class="mr-1">
         <span class="badge badge-secondary">
           {{ tech }}
@@ -47,7 +50,7 @@
 
     <div class="form-group form-check">
       <input type="checkbox" v-model="project.isVisible" class="form-check-input" id="isVisible">
-      <label class="form-check-label" for="isVisible">Set project visibility</label>
+      <label class="form-check-label" for="isVisible">Project visibility</label>
     </div>
 
     <input
