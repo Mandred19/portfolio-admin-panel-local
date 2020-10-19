@@ -1,7 +1,9 @@
 <template>
   <div class="row">
     <div class="col">
-      <ul class="list-group">
+      <ul
+      v-if="projectsList && projectsList.length"
+      class="list-group">
         <li
           v-for="item of projectsList"
           :key="item.id"
@@ -51,6 +53,8 @@
           </div>
         </li>
       </ul>
+
+      <p v-else>Projects list is empty</p>
     </div>
   </div>
 </template>
