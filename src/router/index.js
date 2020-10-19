@@ -12,7 +12,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
+    path: '/projects',
     name: 'ProjectsList',
     component: ProjectsList,
   },
@@ -40,6 +40,10 @@ const routes = [
     path: '/add-skill',
     name: 'AddSkill',
     component: AddSkill,
+  },
+  {
+    path: '*',
+    redirect: ProjectsList,
   },
 ];
 

@@ -33,7 +33,7 @@ export default {
   computed: {
     navLinks() {
       return [
-        { to: '/', title: 'Projects', active: this.$route.name === 'ProjectsList' },
+        { to: '/projects', title: 'Projects', active: this.$route.name === 'ProjectsList' },
         { to: '/add-project', title: 'Add project', active: this.$route.name === 'AddProject' },
         { to: '/skills', title: 'Skills', active: this.$route.name === 'SkillsList' },
         { to: '/add-skill', title: 'Add skill', active: this.$route.name === 'AddSkill' },

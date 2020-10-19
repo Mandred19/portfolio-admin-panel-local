@@ -20,7 +20,11 @@ export default {
   methods: {
     ...mapActions(['uploadProject']),
     async uploadNewProject(form) {
-      await this.uploadProject(form);
+      try {
+        await this.uploadProject(form);
+      } catch (e) {
+        console.warn(e);
+      }
     },
   },
 };

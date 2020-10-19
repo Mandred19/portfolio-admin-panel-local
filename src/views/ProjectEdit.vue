@@ -23,10 +23,18 @@ export default {
     ProjectEditForm,
   },
   methods: {
-    ...mapActions(['updateProject']),
-    async editProject(form) {
-      await this.updateProject({ id: this.$route.params.id, form });
-      await this.$router.push({ name: 'ProjectsList' });
+    ...mapActions(['updateProject', 'removeImage']),
+    async editProject(project) {
+      const { id } = this.$route.params;
+      try {
+        if (this.selectedProject.imageName !== project.imageName) {
+          await this.removeImage(id);
+        }
+        await this.updateProject({ id, project });
+        await this.$router.push({ name: 'ProjectsList' });
+      } catch (e) {
+        console.warn(e);
+      }
     },
   },
   computed: {

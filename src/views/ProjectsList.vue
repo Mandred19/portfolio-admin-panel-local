@@ -62,8 +62,12 @@ export default {
   name: 'ProjectsList',
   methods: {
     ...mapActions(['removeProject']),
-    deleteProject(id) {
-      this.removeProject(id);
+    async deleteProject(id) {
+      try {
+        await this.removeProject(id);
+      } catch (e) {
+        console.warn(e);
+      }
     },
   },
   computed: {
