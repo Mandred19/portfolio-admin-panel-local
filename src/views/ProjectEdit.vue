@@ -5,7 +5,7 @@
         <img src="" alt="" class="mb-3">
 
         <ProjectEditForm
-        @submitHandler="updateProject($event)"
+        @submitHandler="editProject($event)"
         :submitTitle="'Save changes'"
         :selectedProject="selectedProject"/>
       </div>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import ProjectEditForm from '../components/ProjectEditForm';
 
 export default {
@@ -23,8 +23,10 @@ export default {
     ProjectEditForm,
   },
   methods: {
-    async updateProject(form) {
-      console.log(form);
+    ...mapActions(['updateProject']),
+    async editProject(form) {
+      await this.updateProject({ id: this.$route.params.id, form });
+      await this.$router.push({ name: 'ProjectsList' });
     },
   },
   computed: {

@@ -58,6 +58,15 @@ export default new Vuex.Store({
         console.warn(e);
       }
     },
+    async updateProject({ getters, dispatch }, { id, form }) {
+      console.log(form);
+      try {
+        await getters.getDB.ref().child('projects').child(id).update({ ...form });
+        await dispatch('updateProjectList');
+      } catch (e) {
+        console.warn(e);
+      }
+    },
     uploadImage({ getters, dispatch }, { dir, project }) {
       const ref = getters.getStorage.ref().child(`${dir}/${project.image.name}`).put(project.image);
       ref.on('state_changed',
