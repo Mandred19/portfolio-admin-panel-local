@@ -21,14 +21,14 @@ export default {
     SkillEditForm,
   },
   methods: {
-    ...mapActions(['updateSkill', 'removeImage']),
-    async editSkill(skill) {
+    ...mapActions(['updateData', 'removeImage']),
+    async editSkill(payload) {
       const { id } = this.$route.params;
       try {
-        if (this.selectedSkill.imageName !== skill.imageName) {
-          await this.removeImage(id);
+        if (payload.imageName && this.selectedSkill.imageName !== payload.imageName) {
+          await this.removeImage({ dir: 'skills', id });
         }
-        await this.updateProject({ id, skill });
+        await this.updateData({ id, dir: 'skills', payload });
         await this.$router.push({ name: 'SkillsList' });
       } catch (e) {
         console.warn(e);
@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      skillsList: 'getSkills',
+      skillsList: 'getSkillsList',
     }),
     selectedSkill() {
       return this.skillsList.find((item) => item.id === this.$route.params.id);

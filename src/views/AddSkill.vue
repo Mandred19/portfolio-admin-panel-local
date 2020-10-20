@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <SkillEditForm
-        @submitHandler="uploadNewSkill($event)"
+        @submitHandler="uploadSkill($event)"
         :submitTitle="'Add skill'"/>
     </div>
   </div>
@@ -18,10 +18,10 @@ export default {
     SkillEditForm,
   },
   methods: {
-    ...mapActions(['uploadSkill']),
-    async uploadNewSkill(form) {
+    ...mapActions(['uploadData']),
+    async uploadSkill(payload) {
       try {
-        await this.uploadSkill(form);
+        await this.uploadData({ dir: 'skills', payload });
       } catch (e) {
         console.warn(e);
       }

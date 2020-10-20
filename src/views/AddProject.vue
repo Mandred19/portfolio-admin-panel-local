@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <ProjectEditForm
-      @submitHandler="uploadNewProject($event)"
+      @submitHandler="uploadProject($event)"
       :submitTitle="'Add project'"/>
     </div>
   </div>
@@ -18,10 +18,10 @@ export default {
     ProjectEditForm,
   },
   methods: {
-    ...mapActions(['uploadProject']),
-    async uploadNewProject(form) {
+    ...mapActions(['uploadData']),
+    async uploadProject(payload) {
       try {
-        await this.uploadProject(form);
+        await this.uploadData({ dir: 'projects', payload });
       } catch (e) {
         console.warn(e);
       }

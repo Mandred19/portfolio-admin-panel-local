@@ -65,10 +65,10 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'ProjectsList',
   methods: {
-    ...mapActions(['removeProject']),
+    ...mapActions(['removeData']),
     async deleteProject(id) {
       try {
-        await this.removeProject(id);
+        await this.removeData({ dir: 'projects', id });
       } catch (e) {
         console.warn(e);
       }
@@ -76,7 +76,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      projectsList: 'getProjects',
+      projectsList: 'getProjectsList',
     }),
   },
 };

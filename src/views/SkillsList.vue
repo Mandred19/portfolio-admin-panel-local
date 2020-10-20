@@ -2,10 +2,10 @@
     <div class="row">
       <div class="col">
         <ul
-        v-if="skillsLIst && skillsLIst.length"
+        v-if="skillsList && skillsList.length"
         class="list-group">
           <li
-          v-for="(item, idx) of skillsLIst"
+          v-for="(item, idx) of skillsList"
           :key="idx"
           class="list-group-item">
             <div class="card card-header">
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="col">
-                  <img :src="item.imageSrc" :alt="item.title" class="mb-2" style="width: 200px">
+                  <img :src="item.imageSrc" :alt="item.title" class="mb-2" style="width: 75px">
                 </div>
               </div>
 
@@ -45,10 +45,10 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'SkillsList',
   methods: {
-    ...mapActions(['removeSkill']),
+    ...mapActions(['removeData']),
     async deleteSkill(id) {
       try {
-        await this.removeSkill(id);
+        await this.removeData({ dir: 'skills', id });
       } catch (e) {
         console.warn(e);
       }
@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      skillsLIst: 'getSkillsList',
+      skillsList: 'getSkillsList',
     }),
   },
 };

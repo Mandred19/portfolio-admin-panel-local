@@ -14,7 +14,7 @@
     @change="addFileHandler($event)"
     type="file"
     :multiple="false"
-    accept="image/png, image/jpeg"
+    accept="image/png, image/jpeg, image/svg+xml"
     id="project-add-file"
     style="margin-bottom: 16px;">
 

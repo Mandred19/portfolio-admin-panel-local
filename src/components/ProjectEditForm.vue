@@ -5,6 +5,8 @@
       <input v-model="project.title" type="text" class="form-control" id="project-title">
     </div>
 
+    <strong>{{ this.project.imageName }}</strong>
+
     <div class="form-group">
       <label for="project-url">Project GIT URL</label>
       <input v-model="project.url" type="url" class="form-control" id="project-url">
