@@ -17,6 +17,28 @@ export default {
         console.warn(e);
       }
     },
+    async uploadSkill({ dispatch }, skill) {
+      try {
+        await dispatch('uploadImage', { dir: 'skills', skill });
+      } catch (e) {
+        console.warn(e);
+      }
+    },
+    async saveSkillInDB({ getters, dispatch }, skill) {
+      try {
+        await getters.getDB.ref('skills').push(skill);
+        await dispatch('updateSkillsList');
+      } catch (e) {
+        console.warn(e);
+      }
+    },
+    async updateSkill({ dispatch }, { id, skill }) {
+      try {
+        await dispatch('updateImage', { id, dir: 'skills', skill });
+      } catch (e) {
+        console.warn(e);
+      }
+    },
     async removeSkill({ dispatch }, id) {
       const ref = await dispatch('removeImage', id);
       try {

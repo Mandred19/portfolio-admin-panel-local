@@ -2,8 +2,6 @@
   <div class="row">
     <div class="col">
       <div class="card card-body">
-        <img src="" alt="" class="mb-3">
-
         <ProjectEditForm
         @submitHandler="editProject($event)"
         :submitTitle="'Save changes'"
