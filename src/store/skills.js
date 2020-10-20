@@ -17,5 +17,14 @@ export default {
         console.warn(e);
       }
     },
+    async removeSkill({ dispatch }, id) {
+      const ref = await dispatch('removeImage', id);
+      try {
+        await ref.remove();
+        await dispatch('updateSkillsList');
+      } catch (e) {
+        console.warn(e);
+      }
+    },
   },
 };
