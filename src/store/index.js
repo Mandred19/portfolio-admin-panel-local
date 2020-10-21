@@ -79,7 +79,7 @@ export default new Vuex.Store({
         () => {
           ref.snapshot.ref.getDownloadURL()
             .then((imageSrc) => {
-              dispatch('_saveDataInDB', { dir, data: { imageSrc, ...payload } });
+              dispatch('_saveDataInDB', { dir, data: { ...payload, imageSrc } });
             })
             .catch((e) => console.warn(e));
         });
@@ -94,7 +94,7 @@ export default new Vuex.Store({
           () => {
             ref.snapshot.ref.getDownloadURL()
               .then((imageSrc) => {
-                getters.getDB.ref(dir).child(id).update({ imageSrc, ...payload });
+                getters.getDB.ref(dir).child(id).update({ ...payload, imageSrc });
                 dispatch('_updateDataList', dir);
               })
               .catch((e) => console.warn(e));

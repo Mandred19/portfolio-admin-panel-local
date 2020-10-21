@@ -2,19 +2,17 @@
   <form @submit.prevent="submitHandler">
     <div class="form-group">
       <label for="project-title">Project title</label>
-      <input v-model="project.title" type="text" class="form-control" id="project-title">
+      <input v-model="title" type="text" class="form-control" id="project-title">
     </div>
-
-    <strong>{{ this.project.imageName }}</strong>
 
     <div class="form-group">
       <label for="project-url">Project GIT URL</label>
-      <input v-model="project.url" type="url" class="form-control" id="project-url">
+      <input v-model="url" type="url" class="form-control" id="project-url">
     </div>
 
     <div class="form-group mb-4">
       <label for="project-completion-date">Project completion date</label>
-      <input v-model="project.date" type="date" class="form-control" id="project-completion-date">
+      <input v-model="date" type="date" class="form-control" id="project-completion-date">
     </div>
 
     <label class="form-check-label mb-2" for="tech-input">Project technologies</label>
@@ -34,9 +32,9 @@
     </div>
 
     <div class="d-flex flex-row flex-wrap mb-3">
-      <template v-if="project.technologies.length">
+      <template v-if="technologies.length">
         <h4
-          v-for="(tech, idx) of project.technologies"
+          v-for="(tech, idx) of technologies"
           :key="idx"
           @click.stop="deleteTechnology(tech)"
           :title="`Click to remove ${tech}`"
@@ -51,7 +49,7 @@
     </div>
 
     <div class="form-group form-check">
-      <input type="checkbox" v-model="project.isVisible" class="form-check-input" id="isVisible">
+      <input type="checkbox" v-model="isVisible" class="form-check-input" id="isVisible">
       <label class="form-check-label" for="isVisible">Project visibility</label>
     </div>
 
@@ -66,7 +64,7 @@
     <div class="form-group d-flex flex-column">
       <label for="project-description">Project description</label>
       <textarea
-        v-model="project.description"
+        v-model="description"
         name="description"
         id="project-description"
         cols="30"
@@ -86,53 +84,72 @@ export default {
   },
   created() {
     if (this.$route.name === 'ProjectEdit') {
-      this.project = this.selectedProject;
+      const {
+        title, url, date, description, image, imageName, imageSrc, technologies, isVisible,
+      } = this.selectedProject;
+      this.title = title;
+      this.url = url;
+      this.date = date;
+      this.description = description;
+      this.image = image;
+      this.imageName = imageName;
+      this.imageSrc = imageSrc;
+      this.technologies = technologies;
+      this.isVisible = isVisible;
     }
   },
   methods: {
     addTechnology(tech) {
       if (tech) {
-        this.project.technologies.push(tech);
+        this.technologies.push(tech);
         this.technology = '';
       }
     },
     deleteTechnology(tech) {
-      this.project.technologies = this.project.technologies.filter((item) => item !== tech);
+      this.technologies = this.technologies.filter((item) => item !== tech);
     },
     submitHandler() {
-      this.$emit('submitHandler', this.project);
+      this.$emit('submitHandler', {
+        title: this.title,
+        url: this.url,
+        date: this.date,
+        description: this.description,
+        image: this.image,
+        imageName: this.imageName,
+        imageSrc: this.imageSrc,
+        technologies: this.technologies,
+        isVisible: this.isVisible,
+      });
       this.resetForm();
     },
     addFileHandler(event) {
       // eslint-disable-next-line prefer-destructuring
-      this.project.image = event.target.files[0];
-      this.project.imageName = `projects/${event.target.files[0].name}`;
+      this.image = event.target.files[0];
+      this.imageName = `projects/${event.target.files[0].name}`;
     },
     resetForm() {
-      this.project = {
-        title: null,
-        url: null,
-        date: null,
-        description: null,
-        image: null,
-        imageName: null,
-        technologies: ['HTML', 'CSS', 'JavaScript'],
-        isVisible: true,
-      };
+      this.title = null;
+      this.url = null;
+      this.date = null;
+      this.description = null;
+      this.image = null;
+      this.imageName = null;
+      this.imageSrc = null;
+      this.technologies = ['HTML', 'CSS', 'JavaScript'];
+      this.isVisible = true;
     },
   },
   data() {
     return {
-      project: {
-        title: null,
-        url: null,
-        date: null,
-        description: null,
-        image: null,
-        imageName: null,
-        technologies: ['HTML', 'CSS', 'JavaScript'],
-        isVisible: true,
-      },
+      title: null,
+      url: null,
+      date: null,
+      description: null,
+      image: null,
+      imageName: null,
+      imageSrc: null,
+      technologies: ['HTML', 'CSS', 'JavaScript'],
+      isVisible: true,
       technology: '',
     };
   },

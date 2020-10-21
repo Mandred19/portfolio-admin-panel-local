@@ -1,7 +1,6 @@
 <template>
   <div class="row">
     <div class="col">
-      {{ selectedProject.imageName }} {{ $store.state.projectsList }}
       <div class="card card-body">
         <ProjectEditForm
         @submitHandler="editProject($event)"
