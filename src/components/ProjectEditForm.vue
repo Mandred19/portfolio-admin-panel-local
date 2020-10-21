@@ -79,7 +79,7 @@
 export default {
   name: 'ProjectEditForm',
   props: {
-    submitTitle: { type: String, require },
+    submitTitle: { type: String },
     selectedProject: { type: Object, default: () => {} },
   },
   created() {

@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="col">
-                  <img :src="item.imageSrc" :alt="item.title" class="mb-2" style="width: 75px">
+                  <img :src="item.imageSrc" :alt="item.title" class="mb-2" style="width: 50px">
                 </div>
               </div>
 

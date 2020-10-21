@@ -5,12 +5,13 @@ import firebase from 'firebase';
 
 import projects from './projects';
 import skills from './skills';
+import info from './info';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    projects, skills,
+    projects, skills, info,
   },
   state: {
     db: null,
@@ -30,11 +31,15 @@ export default new Vuex.Store({
       commit('_SET_STORAGE');
       dispatch('_updateProjectsList');
       dispatch('_updateSkillsList');
+      dispatch('_updateAdminInfo');
+      dispatch('_updateMainImage');
+      dispatch('_updateBio');
     },
     async _updateDataList({ dispatch }, dir) {
       switch (dir) {
       case 'projects': await dispatch('_updateProjectsList'); break;
       case 'skills': await dispatch('_updateSkillsList'); break;
+      case 'info': await dispatch('_updateAdminInfo'); break;
       default: break;
       }
     },

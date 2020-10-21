@@ -1,22 +1,22 @@
 <template>
   <form @submit.prevent="submitHandler">
     <div class="form-group">
-      <label for="skill-title">Skill title</label>
-      <input v-model="title" type="text" class="form-control" id="skill-title">
+      <label for="social-title">Social title</label>
+      <input v-model="title" type="text" class="form-control" id="social-title">
     </div>
 
     <div class="form-group">
-      <label for="skill-progress">Skill progress</label>
-      <input v-model="progress" type="number" class="form-control" id="skill-progress">
+      <label for="social-url">Social URL</label>
+      <input v-model="url" type="url" class="form-control" id="social-url">
     </div>
 
     <input
-    @change="addFileHandler($event)"
-    type="file"
-    :multiple="false"
-    accept="image/png, image/jpeg, image/svg+xml"
-    id="skill-add-file"
-    style="margin-bottom: 16px;">
+      @change="addFileHandler($event)"
+      type="file"
+      :multiple="false"
+      accept="image/png, image/jpeg, image/svg+xml"
+      id="social-add-file"
+      style="margin-bottom: 16px;">
 
     <br>
 
@@ -26,18 +26,18 @@
 
 <script>
 export default {
-  name: 'SkillEditForm',
+  name: 'AdminInfoEditForm',
   props: {
     submitTitle: { type: String },
-    selectedSkill: { type: Object, default: () => {} },
+    selectedInfo: { type: Object, default: () => {} },
   },
   created() {
-    if (this.$route.name === 'SkillEdit') {
+    if (this.$route.name === 'AdminInfoEdit') {
       const {
-        title, progress, image, imageName, imageSrc,
-      } = this.selectedSkill;
+        title, url, image, imageName, imageSrc,
+      } = this.selectedInfo;
       this.title = title;
-      this.progress = progress;
+      this.url = url;
       this.image = image;
       this.imageName = imageName;
       this.imageSrc = imageSrc;
@@ -47,7 +47,7 @@ export default {
     submitHandler() {
       this.$emit('submitHandler', {
         title: this.title,
-        progress: this.progress,
+        url: this.url,
         image: this.image,
         imageName: this.imageName,
         imageSrc: this.imageSrc,
@@ -57,11 +57,11 @@ export default {
     addFileHandler(event) {
       // eslint-disable-next-line prefer-destructuring
       this.image = event.target.files[0];
-      this.imageName = `skills/${event.target.files[0].name}`;
+      this.imageName = `info/${event.target.files[0].name}`;
     },
     resetForm() {
       this.title = null;
-      this.progress = null;
+      this.url = null;
       this.image = null;
       this.imageName = null;
       this.imageSrc = null;
@@ -70,7 +70,7 @@ export default {
   data() {
     return {
       title: null,
-      progress: null,
+      url: null,
       image: null,
       imageName: null,
       imageSrc: null,

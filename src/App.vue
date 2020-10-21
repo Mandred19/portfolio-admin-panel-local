@@ -37,6 +37,8 @@ export default {
         { to: '/add-project', title: 'Add project', active: this.$route.name === 'AddProject' },
         { to: '/skills', title: 'Skills', active: this.$route.name === 'SkillsList' },
         { to: '/add-skill', title: 'Add skill', active: this.$route.name === 'AddSkill' },
+        { to: '/admin-info', title: 'Admin info', active: this.$route.name === 'AdminInfo' },
+        { to: '/add-admin-info', title: 'Add info', active: this.$route.name === 'AddAdminInfo' },
       ];
     },
   },

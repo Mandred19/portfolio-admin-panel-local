@@ -7,6 +7,9 @@ import AddProject from '../views/AddProject';
 import SkillsList from '../views/SkillsList';
 import SkillEdit from '../views/SkillEdit';
 import AddSkill from '../views/AddSkill';
+import AdminInfo from '../views/AdminInfo';
+import AdminInfoEdit from '../views/AdminInfoEdit';
+import AddAdminInfo from '../views/AddAdminInfo';
 
 Vue.use(VueRouter);
 
@@ -40,6 +43,21 @@ const routes = [
     path: '/add-skill',
     name: 'AddSkill',
     component: AddSkill,
+  },
+  {
+    path: '/admin-info',
+    name: 'AdminInfo',
+    component: AdminInfo,
+  },
+  {
+    path: '/add-admin-info',
+    name: 'AddAdminInfo',
+    component: AddAdminInfo,
+  },
+  {
+    path: '/admin-info/:id',
+    name: 'AdminInfoEdit',
+    component: AdminInfoEdit,
   },
   {
     path: '*',
